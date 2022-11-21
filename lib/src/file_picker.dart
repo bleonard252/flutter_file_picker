@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:file_picker/src/file_picker_io.dart';
 import 'package:file_picker/src/file_picker_macos.dart';
@@ -8,6 +7,8 @@ import 'package:file_picker/src/linux/file_picker_linux.dart';
 import 'package:file_picker/src/windows/stub.dart'
     if (dart.library.io) 'package:file_picker/src/windows/file_picker_windows.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+import 'package:file_picker/src/flatpak/stub.dart'
+    if (dart.library.io) 'package:file_picker/src/flatpak/file_picker_flatpak.dart';
 
 const String defaultDialogTitle = 'File Picker';
 
@@ -24,8 +25,6 @@ enum FilePickerStatus {
   picking,
   done,
 }
-
-late final _isFlatpak = File("/app/manifest.json").existsSync();
 
 /// The interface that implementations of file_picker must implement.
 ///

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dbus/dbus.dart';
 import 'package:file_picker/src/file_picker.dart';
 
@@ -9,6 +11,7 @@ import 'package:file_picker/src/flatpak/dbus/response_dbus.dart';
 import 'package:file_picker/src/flatpak/filters.dart';
 
 late final dbusClient = DBusClient.session();
+late final isFlatpak =  File("/app/manifest.json").existsSync();
 
 class FilePickerFlatpak extends FilePicker {
   @override
