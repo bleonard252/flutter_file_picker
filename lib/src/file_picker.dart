@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:file_picker/src/file_picker_io.dart';
 import 'package:file_picker/src/file_picker_macos.dart';
@@ -51,7 +52,7 @@ abstract class FilePicker extends PlatformInterface {
     if (Platform.isAndroid || Platform.isIOS) {
       return FilePickerIO();
     } else if (Platform.isLinux) {
-      if (_isFlatpak) {
+      if (isFlatpak) {
         return FilePickerFlatpak();
       } else {
         return FilePickerLinux();

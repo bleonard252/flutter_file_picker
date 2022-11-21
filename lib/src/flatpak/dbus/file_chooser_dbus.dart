@@ -1,6 +1,8 @@
 // This file was generated using the following command and may be overwritten.
 // dart-dbus generate-remote-object org.freedesktop.portal.FileChooser.xml
 
+//@ignore-file
+
 import 'package:dbus/dbus.dart';
 
 class OrgFreedesktopPortalFileChooser extends DBusRemoteObject {
