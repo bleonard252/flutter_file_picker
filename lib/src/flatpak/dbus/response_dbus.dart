@@ -1,0 +1,26 @@
+// This file was generated using the following command and may be overwritten.
+// dart-dbus generate-remote-object org.freedesktop.portal.Request.xml
+
+import 'package:dbus/dbus.dart';
+
+/// Signal data for org.freedesktop.portal.Request.Response.
+class OrgFreedesktopPortalRequestResponse extends DBusSignal {
+  int get response => (values[0] as DBusUint32).value;
+  Map<String, DBusValue> get results => (values[1] as DBusDict).mapStringVariant();
+
+  OrgFreedesktopPortalRequestResponse(DBusSignal signal) : super(sender: signal.sender, path: signal.path, interface: signal.interface, name: signal.name, values: signal.values);
+}
+
+class OrgFreedesktopPortalRequest extends DBusRemoteObject {
+  /// Stream of org.freedesktop.portal.Request.Response signals.
+  late final Stream<OrgFreedesktopPortalRequestResponse> response;
+
+  OrgFreedesktopPortalRequest(DBusClient client, String destination, {DBusObjectPath path = const DBusObjectPath.unchecked('/')}) : super(client, name: destination, path: path) {
+    response = DBusRemoteObjectSignalStream(object: this, interface: 'org.freedesktop.portal.Request', name: 'Response', signature: DBusSignature('ua{sv}')).asBroadcastStream().map((signal) => OrgFreedesktopPortalRequestResponse(signal));
+  }
+
+  /// Invokes org.freedesktop.portal.Request.Close()
+  Future<void> callClose({bool noAutoStart = false, bool allowInteractiveAuthorization = false}) async {
+    await callMethod('org.freedesktop.portal.Request', 'Close', [], replySignature: DBusSignature(''), noAutoStart: noAutoStart, allowInteractiveAuthorization: allowInteractiveAuthorization);
+  }
+}

@@ -25,6 +25,8 @@ enum FilePickerStatus {
   done,
 }
 
+late final _isFlatpak = File("/app/manifest.json").existsSync();
+
 /// The interface that implementations of file_picker must implement.
 ///
 /// Platform implementations should extend this class rather than implement it as `file_picker`
@@ -50,7 +52,11 @@ abstract class FilePicker extends PlatformInterface {
     if (Platform.isAndroid || Platform.isIOS) {
       return FilePickerIO();
     } else if (Platform.isLinux) {
-      return FilePickerLinux();
+      if (_isFlatpak) {
+        return FilePickerFlatpak();
+      } else {
+        return FilePickerLinux();
+      }
     } else if (Platform.isWindows) {
       return filePickerWithFFI();
     } else if (Platform.isMacOS) {
